@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -7,8 +8,14 @@ using UnityEngine;
 public class InstantiateByAddComponent : MonoBehaviour
 {
 
+    public string str = "public class InstantiateByAddComponent : MonoBehaviour";
     void Start()
     {
         Debug.Log($"[InstantiateByAddComponent] 这个脚本通过AddComponent的方式实例化.");
     }
+    //
+    // private void Update()
+    // {
+    //     Debug.Log("~~~~~~~~~~");
+    // }
 }

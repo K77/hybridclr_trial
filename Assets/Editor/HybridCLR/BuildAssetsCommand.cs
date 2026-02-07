@@ -124,6 +124,9 @@ namespace HybridCLR.Editor
                 string dllPath = $"{hotfixDllSrcDir}/{dll}";
                 string dllBytesPath = $"{hotfixAssembliesDstDir}/{dll}.bytes";
                 File.Copy(dllPath, dllBytesPath, true);
+                dllPath = dllPath.Replace("dll","pdb");
+                dllBytesPath = dllBytesPath.Replace("dll","pdb");
+                File.Copy(dllPath, dllBytesPath, true);
                 Debug.Log($"[CopyHotUpdateAssembliesToStreamingAssets] copy hotfix dll {dllPath} -> {dllBytesPath}");
             }
         }

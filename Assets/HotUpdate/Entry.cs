@@ -19,7 +19,8 @@ public static class Entry
     {
         // 代码中动态挂载脚本
         GameObject cube = new GameObject("");
-        cube.AddComponent<InstantiateByAddComponent>();
+        InstantiateByAddComponent aa = cube.AddComponent<InstantiateByAddComponent>();
+        Debug.Log(aa.str);
     }
 
 

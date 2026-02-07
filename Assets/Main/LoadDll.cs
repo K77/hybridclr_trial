@@ -48,6 +48,7 @@ public class LoadDll : MonoBehaviour
         {
             "prefabs",
             "HotUpdate.dll.bytes",
+            "HotUpdate.pdb.bytes",
         }.Concat(AOTMetaAssemblyFiles);
 
         foreach (var asset in assets)
@@ -106,11 +107,14 @@ public class LoadDll : MonoBehaviour
     void StartGame()
     {
         LoadMetadataForAOTAssemblies();
-#if !UNITY_EDITOR
-        _hotUpdateAss = Assembly.Load(ReadBytesFromStreamingAssets("HotUpdate.dll.bytes"));
-#else
-        _hotUpdateAss = System.AppDomain.CurrentDomain.GetAssemblies().First(a => a.GetName().Name == "HotUpdate");
-#endif
+// #if !UNITY_EDITOR
+        byte[] bytes1 = ReadBytesFromStreamingAssets("HotUpdate.dll.bytes");
+        byte[] bytes2 = ReadBytesFromStreamingAssets("HotUpdate.pdb.bytes");
+
+        _hotUpdateAss = Assembly.Load(bytes1, bytes2);
+// #else
+//         _hotUpdateAss = System.AppDomain.CurrentDomain.GetAssemblies().First(a => a.GetName().Name == "HotUpdate");
+// #endif
         Type entryType = _hotUpdateAss.GetType("Entry");
         entryType.GetMethod("Start").Invoke(null, null);
 
